@@ -1,0 +1,13 @@
+build
+drop
+www/webstart/*.jar
+.gradle
+.idea
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings
+target/
+*~
