@@ -392,7 +392,7 @@ public class JBootstrapButtonUI extends BasicButtonUI implements MouseListener, 
 		return result;
 	}
 	
-	public float getCornerRadius(AbstractButton button, Insets insets) {
+	private float getCornerRadius(AbstractButton button, Insets insets) {
 		return StyleUtil.getAdjustedSize(baseStyle.getFont().getSize(), 2, 6, 1, false);
 	}
 	

@@ -38,6 +38,9 @@ public class JBootstrapLF extends BasicLookAndFeel
 	protected void initClassDefaults(UIDefaults table) {
 		super.initClassDefaults(table);
 		StyleButton.registerStyles();
+		StyleLabel.registerStyles();
+
 		table.put("ButtonUI", JBootstrapButtonUI.class.getCanonicalName());
+		table.put("LabelUI", JBootstrapLabelUI.class.getCanonicalName());
 	}
 }

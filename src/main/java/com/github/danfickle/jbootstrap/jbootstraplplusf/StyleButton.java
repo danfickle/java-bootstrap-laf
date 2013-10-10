@@ -10,7 +10,7 @@ import com.github.danfickle.jbootstrap.jbootstraplplusf.StyleUtil.ComponentState
 import com.github.danfickle.jbootstrap.jbootstraplplusf.StyleUtil.StyleQuad;
 import com.github.danfickle.jbootstrap.jbootstraplplusf.StyleUtil.StyleSimpleGradient;
 
-public class StyleButton
+class StyleButton
 {
 	static class BtnBaseStyle
 	{
@@ -278,7 +278,7 @@ public class StyleButton
 		private static final StyleSimpleGradient GRADIENT = 
 				new StyleSimpleGradient(new Color(0xBD362F), null);
 		
-		public void apply(BtnBaseStyle override) 
+		void apply(BtnBaseStyle override) 
 		{
 			override.gradient = GRADIENT;
 		}
@@ -300,7 +300,7 @@ public class StyleButton
 		private static final StyleSimpleGradient GRADIENT = 
 				new StyleSimpleGradient(new Color(0xE6E6E6), null);
 		
-		public void apply(BtnBaseStyle override) 
+		void apply(BtnBaseStyle override) 
 		{
 			override.gradient = GRADIENT;
 		}
@@ -322,7 +322,7 @@ public class StyleButton
 		private static final StyleSimpleGradient GRADIENT = 
 				new StyleSimpleGradient(new Color(0x2F96B4), null);
 		
-		public void apply(BtnBaseStyle override) 
+		void apply(BtnBaseStyle override) 
 		{
 			override.gradient = GRADIENT;
 		}
@@ -344,7 +344,7 @@ public class StyleButton
 		private static final StyleSimpleGradient GRADIENT = 
 				new StyleSimpleGradient(new Color(0x51A351), null);
 		
-		public void apply(BtnBaseStyle override) 
+		void apply(BtnBaseStyle override) 
 		{
 			override.gradient = GRADIENT;
 		}
@@ -366,7 +366,7 @@ public class StyleButton
 		private static final StyleSimpleGradient GRADIENT = 
 				new StyleSimpleGradient(new Color(0xF89406), null);
 		
-		public void apply(BtnBaseStyle override) 
+		void apply(BtnBaseStyle override) 
 		{
 			override.gradient = GRADIENT;
 		}
@@ -388,7 +388,7 @@ public class StyleButton
 		private static final StyleSimpleGradient GRADIENT = 
 				new StyleSimpleGradient(new Color(0x222222), null);
 		
-		public void apply(BtnBaseStyle override) 
+		void apply(BtnBaseStyle override) 
 		{
 			override.gradient = GRADIENT;
 		}
@@ -410,7 +410,7 @@ public class StyleButton
 		private static final StyleSimpleGradient GRADIENT = 
 				new StyleSimpleGradient(new Color(0x0044CC), null);
 		
-		public void apply(BtnBaseStyle override) 
+		void apply(BtnBaseStyle override) 
 		{
 			override.gradient = GRADIENT;
 		}
@@ -433,7 +433,7 @@ public class StyleButton
 		private static final StyleQuad<Integer> MARGIN = new StyleQuad<Integer>(0, 0, 0, 0);
 		private static final Font FONT = new Font("SansSerif", Font.PLAIN, StyleUtil.getComponentFontSize(9));
 
-		public void apply(BtnBaseStyle override) 
+		void apply(BtnBaseStyle override) 
 		{
 			override.padding = PADDING;
 			override.margin = MARGIN;
@@ -458,7 +458,7 @@ public class StyleButton
 		private static final StyleQuad<Integer> MARGIN = new StyleQuad<Integer>(1, 1, 1, 1);
 		private static final Font FONT = new Font("SansSerif", Font.PLAIN, StyleUtil.getComponentFontSize(11));
 
-		public void apply(BtnBaseStyle override) 
+		void apply(BtnBaseStyle override) 
 		{
 			override.padding = PADDING;
 			override.margin = MARGIN;
@@ -483,7 +483,7 @@ public class StyleButton
 		private static final StyleQuad<Integer> MARGIN = new StyleQuad<Integer>(3, 3, 3, 3);
 		private static final Font FONT = new Font("SansSerif", Font.PLAIN, StyleUtil.getComponentFontSize(14));
 
-		public void apply(BtnBaseStyle override) 
+		void apply(BtnBaseStyle override) 
 		{
 			override.padding = PADDING;
 			override.margin = MARGIN;
@@ -502,10 +502,9 @@ public class StyleButton
 		}
 	}
 	
-	
 	private static Map<String, BtnBaseStyle> styleMap = new HashMap<String, BtnBaseStyle>();
 	
-	public static void registerStyles()
+	static void registerStyles()
 	{
 		styleMap.clear();
 		styleMap.put(BtnDefaultStyle.appliesTo(), new BtnDefaultStyle());
@@ -534,7 +533,7 @@ public class StyleButton
 		return styleMap.get(clz);
 	}
 	
-	public static BtnBaseStyle applyStyles(String clss, EnumSet<ComponentState> state)
+	static BtnBaseStyle applyStyles(String clss, EnumSet<ComponentState> state)
 	{
 		String[] clsz = clss.split("\\s+");
 

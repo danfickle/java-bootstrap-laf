@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-public class AppTest
+public class ButtonTest
 {
 	public static void main(String...strings)
 	{
