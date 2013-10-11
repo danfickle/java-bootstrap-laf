@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -76,13 +77,16 @@ public class LabelTest
 				lbl.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "badge badge-important");
 				comp.add(lbl);
 				
-				lbl = new JLabel("badge");
+				lbl = new JLabel("badge (with icon)");
+				lbl.setIcon(new ImageIcon(getClass().getResource("/dialog-information.png")));
 				lbl.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "badge");
+				comp.add(lbl);
+
+				lbl = new JLabel("plain label");
 				comp.add(lbl);
 				
 				JFrame frame = new JFrame("Test");
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				//SwingUtilities.updateComponentTreeUI(frame);
 				frame.getContentPane().add(comp);
 				frame.pack();
 				frame.setVisible(true);

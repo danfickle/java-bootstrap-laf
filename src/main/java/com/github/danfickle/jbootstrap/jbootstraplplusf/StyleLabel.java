@@ -5,13 +5,16 @@ import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.FontUIResource;
+
 class StyleLabel
 {
 	static class LabelBaseStyle
 	{
-		protected Color backgroundColor;
-		protected Color textColor;
-		protected Font font;
+		protected ColorUIResource backgroundColor;
+		protected ColorUIResource textColor;
+		protected FontUIResource font;
 		protected float borderArcSize;
 		
 		Color getBackgroundColor()
@@ -39,9 +42,9 @@ class StyleLabel
 	
 	static class LabelDefaultStyle extends LabelBaseStyle
 	{
-		private static Color BACKGROUND_COLOR = new Color(0x999999);
-		private static Color TEXT_COLOR = Color.WHITE;
-		private static Font FONT = new Font("SansSerif", Font.BOLD, StyleUtil.getComponentFontSize(9));
+		private static ColorUIResource BACKGROUND_COLOR = new ColorUIResource(0x999999);
+		private static ColorUIResource TEXT_COLOR = new ColorUIResource(Color.WHITE);
+		private static FontUIResource FONT = new FontUIResource(Font.SANS_SERIF, Font.BOLD, StyleUtil.getComponentFontSize(9));
 		
 		@Override
 		void applyTo(LabelBaseStyle lbl) 
@@ -60,7 +63,7 @@ class StyleLabel
 	
 	static class LabelInfoStyle extends LabelBaseStyle
 	{
-		private static Color BACKGROUND_COLOR = new Color(0x3A87AD);
+		private static ColorUIResource BACKGROUND_COLOR = new ColorUIResource(0x3A87AD);
 		
 		@Override
 		void applyTo(LabelBaseStyle lbl) 
@@ -76,7 +79,7 @@ class StyleLabel
 	
 	static class LabelWarningStyle extends LabelBaseStyle
 	{
-		private static Color BACKGROUND_COLOR = new Color(0xF89406);
+		private static ColorUIResource BACKGROUND_COLOR = new ColorUIResource(0xF89406);
 		
 		@Override
 		void applyTo(LabelBaseStyle lbl) 
@@ -92,7 +95,7 @@ class StyleLabel
 	
 	static class LabelImportantStyle extends LabelBaseStyle
 	{
-		private static Color BACKGROUND_COLOR = new Color(0xB94A48);
+		private static ColorUIResource BACKGROUND_COLOR = new ColorUIResource(0xB94A48);
 		
 		@Override
 		void applyTo(LabelBaseStyle lbl) 
@@ -108,7 +111,7 @@ class StyleLabel
 	
 	static class LabelInverseStyle extends LabelBaseStyle
 	{
-		private static Color BACKGROUND_COLOR = new Color(0x333333);
+		private static ColorUIResource BACKGROUND_COLOR = new ColorUIResource(0x333333);
 		
 		@Override
 		void applyTo(LabelBaseStyle lbl) 
@@ -124,7 +127,7 @@ class StyleLabel
 	
 	static class LabelSuccessStyle extends LabelBaseStyle
 	{
-		private static Color BACKGROUND_COLOR = new Color(0x468847);
+		private static ColorUIResource BACKGROUND_COLOR = new ColorUIResource(0x468847);
 		
 		@Override
 		void applyTo(LabelBaseStyle lbl) 
@@ -140,9 +143,9 @@ class StyleLabel
 
 	static class BadgeDefaultStyle extends LabelBaseStyle
 	{
-		private static Color BACKGROUND_COLOR = new Color(0x999999);
-		private static Color TEXT_COLOR = Color.WHITE;
-		private static Font FONT = new Font("SansSerif", Font.BOLD, StyleUtil.getComponentFontSize(9));
+		private static ColorUIResource BACKGROUND_COLOR = new ColorUIResource(0x999999);
+		private static ColorUIResource TEXT_COLOR = new ColorUIResource(Color.WHITE);
+		private static FontUIResource FONT = new FontUIResource(Font.SANS_SERIF, Font.BOLD, StyleUtil.getComponentFontSize(9));
 
 		@Override
 		void applyTo(LabelBaseStyle lbl) 
@@ -161,7 +164,7 @@ class StyleLabel
 	
 	static class BadgeInfoStyle extends LabelBaseStyle
 	{
-		private static Color BACKGROUND_COLOR = new Color(0x3A87AD);
+		private static ColorUIResource BACKGROUND_COLOR = new ColorUIResource(0x3A87AD);
 		
 		@Override
 		void applyTo(LabelBaseStyle lbl) 
@@ -177,7 +180,7 @@ class StyleLabel
 	
 	static class BadgeWarningStyle extends LabelBaseStyle
 	{
-		private static Color BACKGROUND_COLOR = new Color(0xF89406);
+		private static ColorUIResource BACKGROUND_COLOR = new ColorUIResource(0xF89406);
 		
 		@Override
 		void applyTo(LabelBaseStyle lbl) 
@@ -193,7 +196,7 @@ class StyleLabel
 	
 	static class BadgeImportantStyle extends LabelBaseStyle
 	{
-		private static Color BACKGROUND_COLOR = new Color(0xB94A48);
+		private static ColorUIResource BACKGROUND_COLOR = new ColorUIResource(0xB94A48);
 		
 		@Override
 		void applyTo(LabelBaseStyle lbl) 
@@ -209,7 +212,7 @@ class StyleLabel
 	
 	static class BadgeInverseStyle extends LabelBaseStyle
 	{
-		private static Color BACKGROUND_COLOR = new Color(0x333333);
+		private static ColorUIResource BACKGROUND_COLOR = new ColorUIResource(0x333333);
 		
 		@Override
 		void applyTo(LabelBaseStyle lbl) 
@@ -225,7 +228,7 @@ class StyleLabel
 	
 	static class BadgeSuccessStyle extends LabelBaseStyle
 	{
-		private static Color BACKGROUND_COLOR = new Color(0x468847);
+		private static ColorUIResource BACKGROUND_COLOR = new ColorUIResource(0x468847);
 		
 		@Override
 		void applyTo(LabelBaseStyle lbl) 
