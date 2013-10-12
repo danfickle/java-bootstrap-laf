@@ -11,6 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import com.github.danfickle.jbootstrap.jbootstraplplusf.JBootstrapFactory.JBootstrapBadgeType;
+import com.github.danfickle.jbootstrap.jbootstraplplusf.JBootstrapFactory.JBootstrapLabelType;
+import com.github.danfickle.jbootstrap.jbootstraplplusf.JBootstrapFactory.JBootstrapTextType;
+
 public class LabelTest
 {
 	public static void main(String...strings)
@@ -33,56 +37,67 @@ public class LabelTest
 				comp.setPreferredSize(new Dimension(500, 400));
 				comp.setBackground(Color.white);		
 
-				JLabel lbl = new JLabel("label");
-				lbl.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "label");
+				JLabel lbl = JBootstrapFactory.createLabel("label", JBootstrapLabelType.DEFAULT);
 				comp.add(lbl);
 
-				lbl = new JLabel("label label-info");
-				lbl.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "label label-info");
+				lbl = JBootstrapFactory.createLabel("label label-info", JBootstrapLabelType.INFO);
 				comp.add(lbl);
 
-				lbl = new JLabel("label label-success");
-				lbl.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "label label-success");
+				lbl = JBootstrapFactory.createLabel("label label-success", JBootstrapLabelType.SUCCESS);
 				comp.add(lbl);
 				
-				lbl = new JLabel("label label-warning");
-				lbl.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "label label-warning");
+				lbl = JBootstrapFactory.createLabel("label label-warning", JBootstrapLabelType.WARNING);
 				comp.add(lbl);
 				
-				lbl = new JLabel("label label-important");
-				lbl.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "label label-important");
+				lbl = JBootstrapFactory.createLabel("label label-important", JBootstrapLabelType.IMPORTANT);
 				comp.add(lbl);
 				
-				lbl = new JLabel("label label-inverse");
-				lbl.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "label label-inverse");
+				lbl = JBootstrapFactory.createLabel("label label-inverse", JBootstrapLabelType.INVERSE);
 				comp.add(lbl);
 				
-				lbl = new JLabel("badge badge-info");
-				lbl.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "badge badge-info");
+				lbl = JBootstrapFactory.createBadge("badge badge-info", JBootstrapBadgeType.INFO);
 				comp.add(lbl);
 
-				lbl = new JLabel("badge badge-success");
-				lbl.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "badge badge-success");
+				lbl = JBootstrapFactory.createBadge("badge badge-success", JBootstrapBadgeType.SUCCESS);
 				comp.add(lbl);
 				
-				lbl = new JLabel("badge badge-warning");
-				lbl.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "badge badge-warning");
+				lbl = JBootstrapFactory.createBadge("badge badge-warning", JBootstrapBadgeType.WARNING);
 				comp.add(lbl);
 				
-				lbl = new JLabel("badge badge-inverse");
-				lbl.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "badge badge-inverse");
+				lbl = JBootstrapFactory.createBadge("badge badge-inverse", JBootstrapBadgeType.INVERSE);
 				comp.add(lbl);
 				
-				lbl = new JLabel("badge badge-important");
-				lbl.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "badge badge-important");
+				lbl = JBootstrapFactory.createBadge("badge badge-important", JBootstrapBadgeType.IMPORTANT);
 				comp.add(lbl);
 				
-				lbl = new JLabel("badge (with icon)");
+				lbl = JBootstrapFactory.createBadge("badge (with icon)", JBootstrapBadgeType.DEFAULT);
 				lbl.setIcon(new ImageIcon(getClass().getResource("/dialog-information.png")));
-				lbl.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "badge");
 				comp.add(lbl);
 
 				lbl = new JLabel("plain label");
+				comp.add(lbl);
+				
+				lbl = JBootstrapFactory.createText("default", JBootstrapTextType.DEFAULT);
+				comp.add(lbl);
+				
+				lbl = JBootstrapFactory.createText("info", JBootstrapTextType.INFO);
+				comp.add(lbl);
+				
+				lbl = JBootstrapFactory.createText("warning", JBootstrapTextType.WARNING);
+				comp.add(lbl);
+				
+				lbl = JBootstrapFactory.createText("error", JBootstrapTextType.ERROR);
+				comp.add(lbl);
+				
+				lbl = JBootstrapFactory.createWrappedText("This is some really long text " +
+						"This is some really long text " +
+						"This is some really long text " +
+						"This is some really long text " +
+						"This is some really long text " +
+						"This is some really long text " +
+						"This is some really long text " +
+						"This is some really long text " +
+						"This is some really long text ", JBootstrapTextType.SUCCESS, 450);
 				comp.add(lbl);
 				
 				JFrame frame = new JFrame("Test");
@@ -94,4 +109,3 @@ public class LabelTest
 		} );
 	}
 }
-

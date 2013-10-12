@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import com.github.danfickle.jbootstrap.jbootstraplplusf.JBootstrapFactory.JBootstrapButtonSize;
+import com.github.danfickle.jbootstrap.jbootstraplplusf.JBootstrapFactory.JBootstrapButtonType;
+
 public class ButtonTest
 {
 	public static void main(String...strings)
@@ -35,54 +38,42 @@ public class ButtonTest
 				comp.setPreferredSize(new Dimension(500, 400));
 				comp.setBackground(Color.white);		
 				
-				JButton btn = new JButton("btn");
-				btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "btn");
+				JButton btn = JBootstrapFactory.createButton("btn", JBootstrapButtonType.DEFAULT, JBootstrapButtonSize.DEFAULT);
 				comp.add(btn);
 
-				btn = new JButton("btn btn-primary");
-				btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "btn btn-primary");
+				btn = JBootstrapFactory.createButton("btn btn-primary", JBootstrapButtonType.PRIMARY, JBootstrapButtonSize.DEFAULT);
 				comp.add(btn);
 
-				btn = new JButton("btn btn-warning");
-				btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "btn btn-warning");
+				btn = JBootstrapFactory.createButton("btn btn-warning", JBootstrapButtonType.WARNING, JBootstrapButtonSize.DEFAULT);
 				comp.add(btn);
 
-				btn = new JButton("btn btn-danger");
-				btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "btn btn-danger");
+				btn = JBootstrapFactory.createButton("btn btn-danger", JBootstrapButtonType.DANGER, JBootstrapButtonSize.DEFAULT);
 				comp.add(btn);
 
-				btn = new JButton("btn btn-info");
-				btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "btn btn-info");
+				btn = JBootstrapFactory.createButton("btn btn-info", JBootstrapButtonType.INFO, JBootstrapButtonSize.DEFAULT);
 				comp.add(btn);
 
-				btn = new JButton("btn btn-inverse");
-				btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "btn btn-inverse");
+				btn = JBootstrapFactory.createButton("btn btn-inverse", JBootstrapButtonType.INVERSE, JBootstrapButtonSize.DEFAULT);
 				comp.add(btn);
 
-				btn = new JButton("btn btn-success");
-				btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "btn btn-success");
+				btn = JBootstrapFactory.createButton("btn btn-success", JBootstrapButtonType.SUCCESS, JBootstrapButtonSize.DEFAULT);
 				comp.add(btn);
 
-				btn = new JButton("btn btn-primary btn-mini");
-				btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "btn btn-primary btn-mini");
+				btn = JBootstrapFactory.createButton("btn btn-primary btn-mini", JBootstrapButtonType.PRIMARY, JBootstrapButtonSize.MINI);
 				comp.add(btn);
 				
-				btn = new JButton("btn btn-primary btn-small");
-				btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "btn btn-primary btn-small");
+				btn = JBootstrapFactory.createButton("btn btn-primary btn-small", JBootstrapButtonType.PRIMARY, JBootstrapButtonSize.SMALL);
 				comp.add(btn);
 				
-				btn = new JButton("btn btn-primary btn-default (disabled)");
+				btn = JBootstrapFactory.createButton("btn btn-primary btn-default (disabled)", JBootstrapButtonType.PRIMARY, JBootstrapButtonSize.DEFAULT);
 				btn.setEnabled(false);
-				btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "btn btn-primary btn-default");
 				comp.add(btn);
 
-				btn = new JButton("btn btn-primary btn-large");
-				btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "btn btn-primary btn-large");
+				btn = JBootstrapFactory.createButton("btn btn-primary btn-large", JBootstrapButtonType.PRIMARY, JBootstrapButtonSize.LARGE);
 				comp.add(btn);
 				
-				btn = new JButton("btn btn-success btn-large (with icon)");
+				btn = JBootstrapFactory.createButton("btn btn-success btn-large (with icon)", JBootstrapButtonType.SUCCESS, JBootstrapButtonSize.LARGE);
 				btn.setIcon(new ImageIcon(getClass().getResource("/dialog-information.png")));
-				btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "btn btn-success btn-large");
 
 				btn.getModel().addActionListener(new ActionListener() 
 				{
@@ -107,4 +98,3 @@ public class ButtonTest
 		} );
 	}
 }
-

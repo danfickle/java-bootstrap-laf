@@ -37,7 +37,6 @@ public class JBootstrapLabelUI extends BasicLabelUI implements PropertyChangeLis
 	private JBootstrapLabelUI(JLabel lbl)
 	{
 		this.lbl = lbl;
-		this.baseStyle = StyleLabel.applyStyles("label");
 	}
 	
 	@Override
@@ -110,6 +109,8 @@ public class JBootstrapLabelUI extends BasicLabelUI implements PropertyChangeLis
 	@Override
 	public void paint(Graphics g, JComponent c) 
 	{
+		((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		
 		if (!isJBootstrapLabel((JLabel) c))
 		{
 			super.paint(g, c);
@@ -119,7 +120,7 @@ public class JBootstrapLabelUI extends BasicLabelUI implements PropertyChangeLis
 		Graphics2D g2 = (Graphics2D) g.create();
 		Color bgSaved = c.getBackground();
 		
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		//g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		paintBackground((JLabel) c, g2, 0, 0, c.getWidth(), c.getHeight());
 
 		c.setBackground(null);
