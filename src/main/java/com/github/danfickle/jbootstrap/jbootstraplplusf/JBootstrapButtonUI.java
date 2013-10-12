@@ -1,10 +1,6 @@
 package com.github.danfickle.jbootstrap.jbootstraplplusf;
 
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -22,12 +18,8 @@ import com.github.danfickle.jbootstrap.jbootstraplplusf.StyleUtil.BorderSide;
 import com.github.danfickle.jbootstrap.jbootstraplplusf.StyleUtil.ComponentState;
 import com.github.danfickle.jbootstrap.jbootstraplplusf.StyleUtil.StyleQuad;
 
-public class JBootstrapButtonUI extends BasicButtonUI implements MouseListener, FocusListener, PropertyChangeListener
+public class JBootstrapButtonUI extends BasicButtonUI implements PropertyChangeListener
 {
-	private static final String BORDER_ORIGINAL = "jbootstrap.buttonborderoriginal";
-	private static final String OPACITY_ORIGINAL = "jbootstrap.buttonopacityoriginal";
-	private static final String FONT_ORIGINAL = "jbootstrap.buttonfontoriginal";
-
 	private final AbstractButton button;
 	private BtnBaseStyle baseStyle;
 
@@ -42,10 +34,9 @@ public class JBootstrapButtonUI extends BasicButtonUI implements MouseListener, 
 		return new JBootstrapButtonUI((AbstractButton) comp);
 	}
 
-	public JBootstrapButtonUI(AbstractButton button) 
+	private JBootstrapButtonUI(AbstractButton button) 
 	{
 		this.button = button;
-		this.baseStyle = StyleButton.applyStyles("btn", state);
 	}
 
 	private boolean isJBootstrapButton(AbstractButton b)
@@ -59,20 +50,24 @@ public class JBootstrapButtonUI extends BasicButtonUI implements MouseListener, 
 	{
 		super.installDefaults(b);
 
-		b.putClientProperty(FONT_ORIGINAL, b.getFont());
+		if (!isJBootstrapButton(b))
+			return;
+		
+		installMyDefaults(b);
+	}
+
+	private void installMyDefaults(AbstractButton b)
+	{
 		b.setFont(baseStyle.getFont());
-
-		b.putClientProperty(BORDER_ORIGINAL, b.getBorder());
 		b.setBorder(getButtonBorder(b, baseStyle));
-
-		b.putClientProperty(OPACITY_ORIGINAL, b.isOpaque());
+		b.setBackground(null);
+		b.setForeground(baseStyle.getTextColor());
 		b.setOpaque(false);
-
 		b.setFocusable(true);
 		b.setRequestFocusEnabled(true);
 		b.setRolloverEnabled(true);
 	}
-
+	
 	@Override
 	protected void uninstallDefaults(AbstractButton b) 
 	{
@@ -81,35 +76,24 @@ public class JBootstrapButtonUI extends BasicButtonUI implements MouseListener, 
 		if (!isJBootstrapButton(b))
 			return;
 		
-		b.setBorder((Border) b.getClientProperty(JBootstrapButtonUI.BORDER_ORIGINAL));
-		b.setOpaque((Boolean) b.getClientProperty(JBootstrapButtonUI.OPACITY_ORIGINAL));
-		b.setFont((Font) b.getClientProperty(FONT_ORIGINAL));
-		b.setOpaque((Boolean) b.getClientProperty(OPACITY_ORIGINAL));
+		b.setBorder(null);
+		b.setOpaque(true);
+		b.setFont(null);
+		b.setBackground(null);
+		b.setForeground(null);
 	}
 
 	@Override
-	protected BasicButtonListener createButtonListener(AbstractButton b)
-	{
-		return null;
-	}
-
-	@Override
-	protected void installListeners(final AbstractButton b)
+	protected void installListeners(AbstractButton b)
 	{
 		super.installListeners(b);
-		
-		b.addMouseListener(this);
-		b.addFocusListener(this);
 		b.addPropertyChangeListener(this);
 	}
 
 	@Override
 	protected void uninstallListeners(AbstractButton b) 
 	{
-		b.removeMouseListener(this);
-		b.removeFocusListener(this);
 		b.removePropertyChangeListener(this);
-
 		super.uninstallListeners(b);
 	}
 
@@ -157,7 +141,7 @@ public class JBootstrapButtonUI extends BasicButtonUI implements MouseListener, 
 		};
 	}
 
-	static void drawRoundedBorder(Graphics2D g2, int x, int y, int w, int h,
+	private static void drawRoundedBorder(Graphics2D g2, int x, int y, int w, int h,
 			StyleQuad<Color> borderColor, int arc, boolean boxShadow)
 	{
 		g2.setStroke(new BasicStroke(0.5f));
@@ -252,6 +236,14 @@ public class JBootstrapButtonUI extends BasicButtonUI implements MouseListener, 
 		
 		g2d.fillRoundRect(x, y, width, height, (int) (getCornerRadius(b, insets) * style.getBorderArcSize()),
 				(int) (getCornerRadius(b, insets) * style.getBorderArcSize()));
+		
+		if (state.contains(ComponentState.DISABLED))
+		{
+			g2d.setColor(BtnBaseStyle.DISABLED_COLOR);
+			
+			g2d.fillRoundRect(x, y, width, height, (int) (getCornerRadius(b, insets) * style.getBorderArcSize()),
+					(int) (getCornerRadius(b, insets) * style.getBorderArcSize()));
+		}
 	}
 
 	@Override
@@ -259,6 +251,28 @@ public class JBootstrapButtonUI extends BasicButtonUI implements MouseListener, 
 	{
 		final AbstractButton b = (AbstractButton) c;
 
+		if (!isJBootstrapButton(b))
+		{
+			super.paint(g, c);
+			return;
+		}
+		
+		ButtonModel m = b.getModel();
+		
+		state.clear();
+		
+		if (m.isPressed() || m.isArmed())
+			state.add(ComponentState.ACTIVE);
+		
+		if (!m.isEnabled())
+			state.add(ComponentState.DISABLED);
+		
+		if (m.isRollover())
+			state.add(ComponentState.HOVER);
+		
+		if (b.hasFocus())
+			state.add(ComponentState.FOCUSED);
+		
 		BtnBaseStyle style = StyleButton.applyStyles((String) b.getClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS), state);
 		
 		FontMetrics fm = g.getFontMetrics();
@@ -299,9 +313,8 @@ public class JBootstrapButtonUI extends BasicButtonUI implements MouseListener, 
 			paintButtonText(g2d, b, textRect, text, style);
 
 		// Paint the Icon
-		if (b.getIcon() != null) {
+		if (b.getIcon() != null)
 			paintIcon(g2d, c, iconRect);
-		}
 
 		if (b.isFocusPainted() && state.contains(ComponentState.FOCUSED))
 			drawFocusRing(g2d, b.getWidth(), b.getHeight());
@@ -324,7 +337,8 @@ public class JBootstrapButtonUI extends BasicButtonUI implements MouseListener, 
 		return result;
 	}
 
-	private static int getMinButtonWidth(int fontSize) {
+	private static int getMinButtonWidth(int fontSize)
+	{
 		return 5 * fontSize + 12;
 	}
 	
@@ -392,7 +406,8 @@ public class JBootstrapButtonUI extends BasicButtonUI implements MouseListener, 
 		return result;
 	}
 	
-	private float getCornerRadius(AbstractButton button, Insets insets) {
+	private float getCornerRadius(AbstractButton button, Insets insets) 
+	{
 		return StyleUtil.getAdjustedSize(baseStyle.getFont().getSize(), 2, 6, 1, false);
 	}
 	
@@ -447,55 +462,8 @@ public class JBootstrapButtonUI extends BasicButtonUI implements MouseListener, 
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) 
+	public void propertyChange(PropertyChangeEvent evt)
 	{
-		button.requestFocusInWindow();
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) 
-	{
-		state.add(ComponentState.HOVER);
-		button.repaint();
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) 
-	{
-		state.remove(ComponentState.HOVER);
-		button.repaint();
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) 
-	{
-		state.add(ComponentState.ACTIVE);
-		button.repaint();
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) 
-	{
-		state.remove(ComponentState.ACTIVE);
-		button.repaint();
-	}
-
-	@Override
-	public void focusGained(FocusEvent e) 
-	{
-		state.add(ComponentState.FOCUSED);
-		button.repaint();
-	}
-
-	@Override
-	public void focusLost(FocusEvent e) 
-	{
-		state.remove(ComponentState.FOCUSED);
-		button.repaint();
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
 		if (!evt.getPropertyName().equals(JBootstrapLF.JBOOTSTRAP_CLASS))
 			return;
 		
@@ -510,12 +478,10 @@ public class JBootstrapButtonUI extends BasicButtonUI implements MouseListener, 
 				@Override
 				public void run() 
 				{
-					button.setBorder(getButtonBorder(button, baseStyle));
-					button.setFont(baseStyle.getFont());
+					installMyDefaults(button);
 					button.repaint();
 				}
-			});
-			
+			});	
 		}
 	}
 }

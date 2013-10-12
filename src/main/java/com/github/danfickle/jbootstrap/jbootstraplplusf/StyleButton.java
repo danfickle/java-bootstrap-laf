@@ -6,6 +6,9 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.FontUIResource;
+
 import com.github.danfickle.jbootstrap.jbootstraplplusf.StyleUtil.ComponentState;
 import com.github.danfickle.jbootstrap.jbootstraplplusf.StyleUtil.StyleQuad;
 import com.github.danfickle.jbootstrap.jbootstraplplusf.StyleUtil.StyleSimpleGradient;
@@ -16,8 +19,8 @@ class StyleButton
 	{
 		protected StyleSimpleGradient gradient;
 		protected float borderArcSize;
-		protected Font font;
-		protected Color textColor;
+		protected FontUIResource font;
+		protected ColorUIResource textColor;
 		protected StyleQuad<Color> borderColor;
 		protected StyleQuad<Integer> padding;
 		protected StyleQuad<Integer> margin;
@@ -26,6 +29,7 @@ class StyleButton
 		protected static final Color ALPHA1 = new Color(0, 0, 0, 0.1f);
 		protected static final Color ALPHA2 = new Color(0, 0, 0, 0.25f);
 		protected static final Color BOX_SHADOW_COLOR = new Color(1, 1, 1, 0.2f);
+		protected static final Color DISABLED_COLOR = new Color(1, 1, 1, 0.35f);
 		
 		StyleSimpleGradient getGradient()
 		{
@@ -73,7 +77,7 @@ class StyleButton
 	private static class BtnDefaultStyle extends BtnBaseStyle
 	{
 		private static final StyleSimpleGradient GRADIENT = 
-				new StyleSimpleGradient(Color.white, new Color(0xE6, 0xE6, 0xE6));
+				new StyleSimpleGradient(Color.white, new ColorUIResource(0xE6, 0xE6, 0xE6));
 
 		private static final StyleQuad<Color> BORDER_COLOR = 
 				new StyleQuad<Color>(ALPHA1, new Color(0xB3, 0xB3, 0xB3), ALPHA2, ALPHA1); 
@@ -84,9 +88,9 @@ class StyleButton
 
 		private static final StyleQuad<Integer> FOCUS_PADDING = new StyleQuad<Integer>(3, 3, 3, 3);
 		
-		private static final Color TEXT_COLOR = new Color(0x33, 0x33, 0x33);
+		private static final ColorUIResource TEXT_COLOR = new ColorUIResource(0x33, 0x33, 0x33);
 		
-		private static final Font BTN_FONT = new Font("SansSerif", Font.PLAIN, StyleUtil.getComponentFontSize(12));
+		private static final FontUIResource BTN_FONT = new FontUIResource(Font.SANS_SERIF, Font.PLAIN, StyleUtil.getComponentFontSize(12));
 		
 		static void apply(BtnBaseStyle override) 
 		{
@@ -122,7 +126,7 @@ class StyleButton
 		
 		static void apply(BtnBaseStyle override) 
 		{
-			override.textColor = Color.white;
+			override.textColor = new ColorUIResource(Color.WHITE);
 			override.gradient = GRADIENT;
 			override.borderColor = BORDER_COLOR;
 		}
@@ -149,7 +153,7 @@ class StyleButton
 		
 		static void apply(BtnBaseStyle override) 
 		{
-			override.textColor = Color.white;
+			override.textColor = new ColorUIResource(Color.WHITE);
 			override.gradient = GRADIENT;
 			override.borderColor = BORDER_COLOR;
 		}
@@ -176,7 +180,7 @@ class StyleButton
 		
 		static void apply(BtnBaseStyle override) 
 		{
-			override.textColor = Color.white;
+			override.textColor = new ColorUIResource(Color.WHITE);
 			override.gradient = GRADIENT;
 			override.borderColor = BORDER_COLOR;
 		}
@@ -203,7 +207,7 @@ class StyleButton
 		
 		static void apply(BtnBaseStyle override) 
 		{
-			override.textColor = Color.white;
+			override.textColor = new ColorUIResource(Color.WHITE);
 			override.gradient = GRADIENT;
 			override.borderColor = BORDER_COLOR;
 		}
@@ -230,7 +234,7 @@ class StyleButton
 		
 		static void apply(BtnBaseStyle override) 
 		{
-			override.textColor = Color.white;
+			override.textColor = new ColorUIResource(Color.WHITE);
 			override.gradient = GRADIENT;
 			override.borderColor = BORDER_COLOR;
 		}
@@ -256,7 +260,7 @@ class StyleButton
 		
 		static void apply(BtnBaseStyle override) 
 		{
-			override.textColor = Color.white;
+			override.textColor = new ColorUIResource(Color.WHITE);
 			override.gradient = GRADIENT;
 			override.borderColor = BORDER_COLOR;
 		}
@@ -431,7 +435,7 @@ class StyleButton
 	{
 		private static final StyleQuad<Integer> PADDING = new StyleQuad<Integer>(1, 1, 1, 1);
 		private static final StyleQuad<Integer> MARGIN = new StyleQuad<Integer>(0, 0, 0, 0);
-		private static final Font FONT = new Font("SansSerif", Font.PLAIN, StyleUtil.getComponentFontSize(9));
+		private static final FontUIResource FONT = new FontUIResource(Font.SANS_SERIF, Font.PLAIN, StyleUtil.getComponentFontSize(9));
 
 		void apply(BtnBaseStyle override) 
 		{
@@ -456,7 +460,7 @@ class StyleButton
 	{
 		private static final StyleQuad<Integer> PADDING = new StyleQuad<Integer>(1, 1, 1, 1);
 		private static final StyleQuad<Integer> MARGIN = new StyleQuad<Integer>(1, 1, 1, 1);
-		private static final Font FONT = new Font("SansSerif", Font.PLAIN, StyleUtil.getComponentFontSize(11));
+		private static final FontUIResource FONT = new FontUIResource(Font.SANS_SERIF, Font.PLAIN, StyleUtil.getComponentFontSize(11));
 
 		void apply(BtnBaseStyle override) 
 		{
@@ -481,7 +485,7 @@ class StyleButton
 	{
 		private static final StyleQuad<Integer> PADDING = new StyleQuad<Integer>(5, 5, 5, 5);
 		private static final StyleQuad<Integer> MARGIN = new StyleQuad<Integer>(3, 3, 3, 3);
-		private static final Font FONT = new Font("SansSerif", Font.PLAIN, StyleUtil.getComponentFontSize(14));
+		private static final FontUIResource FONT = new FontUIResource(Font.SANS_SERIF, Font.PLAIN, StyleUtil.getComponentFontSize(14));
 
 		void apply(BtnBaseStyle override) 
 		{

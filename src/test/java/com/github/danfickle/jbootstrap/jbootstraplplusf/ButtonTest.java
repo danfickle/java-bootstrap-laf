@@ -3,6 +3,8 @@ package com.github.danfickle.jbootstrap.jbootstraplplusf;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -69,7 +71,8 @@ public class ButtonTest
 				btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "btn btn-primary btn-small");
 				comp.add(btn);
 				
-				btn = new JButton("btn btn-primary btn-default");
+				btn = new JButton("btn btn-primary btn-default (disabled)");
+				btn.setEnabled(false);
 				btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "btn btn-primary btn-default");
 				comp.add(btn);
 
@@ -80,11 +83,23 @@ public class ButtonTest
 				btn = new JButton("btn btn-success btn-large (with icon)");
 				btn.setIcon(new ImageIcon(getClass().getResource("/dialog-information.png")));
 				btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, "btn btn-success btn-large");
+
+				btn.getModel().addActionListener(new ActionListener() 
+				{
+					@Override
+					public void actionPerformed(ActionEvent arg0)
+					{
+						System.out.println("button works");
+					}
+				});
+				
+				comp.add(btn);
+
+				btn = new JButton("plain button");
 				comp.add(btn);
 				
 				JFrame frame = new JFrame("Test");
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				//SwingUtilities.updateComponentTreeUI(frame);
 				frame.getContentPane().add(comp);
 				frame.pack();
 				frame.setVisible(true);
