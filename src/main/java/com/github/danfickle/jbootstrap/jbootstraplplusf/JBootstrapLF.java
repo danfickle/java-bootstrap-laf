@@ -42,5 +42,6 @@ public class JBootstrapLF extends BasicLookAndFeel
 
 		table.put("ButtonUI", JBootstrapButtonUI.class.getCanonicalName());
 		table.put("LabelUI", JBootstrapLabelUI.class.getCanonicalName());
+		table.put("TextFieldUI", JBootstrapTextFieldUI.class.getCanonicalName());
 	}
 }

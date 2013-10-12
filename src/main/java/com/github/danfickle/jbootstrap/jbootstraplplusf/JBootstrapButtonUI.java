@@ -133,7 +133,7 @@ public class JBootstrapButtonUI extends BasicButtonUI implements PropertyChangeL
 						width  - style.getFocusPadding().getLeft() - style.getFocusPadding().getRight(),
 						height - style.getFocusPadding().getTop() - style.getFocusPadding().getBottom(), 
 						style.getBorderColor(),
-						(int) (getCornerRadius((AbstractButton) c, ((AbstractButton) c).getInsets()) * style.getBorderArcSize()),
+						(int) (getCornerRadius() * style.getBorderArcSize()),
 						!state.contains(ComponentState.ACTIVE));
 				
 				g2d.dispose();
@@ -232,17 +232,15 @@ public class JBootstrapButtonUI extends BasicButtonUI implements PropertyChangeL
 			g2d.setColor(style.getGradient().getStart());
 		}
 		
-		Insets insets = b.getInsets();
-		
-		g2d.fillRoundRect(x, y, width, height, (int) (getCornerRadius(b, insets) * style.getBorderArcSize()),
-				(int) (getCornerRadius(b, insets) * style.getBorderArcSize()));
+		g2d.fillRoundRect(x, y, width, height, (int) (getCornerRadius() * style.getBorderArcSize()),
+				(int) (getCornerRadius() * style.getBorderArcSize()));
 		
 		if (state.contains(ComponentState.DISABLED))
 		{
 			g2d.setColor(BtnBaseStyle.DISABLED_COLOR);
 			
-			g2d.fillRoundRect(x, y, width, height, (int) (getCornerRadius(b, insets) * style.getBorderArcSize()),
-					(int) (getCornerRadius(b, insets) * style.getBorderArcSize()));
+			g2d.fillRoundRect(x, y, width, height, (int) (getCornerRadius() * style.getBorderArcSize()),
+					(int) (getCornerRadius() * style.getBorderArcSize()));
 		}
 	}
 
@@ -406,7 +404,7 @@ public class JBootstrapButtonUI extends BasicButtonUI implements PropertyChangeL
 		return result;
 	}
 	
-	private float getCornerRadius(AbstractButton button, Insets insets) 
+	private float getCornerRadius() 
 	{
 		return StyleUtil.getAdjustedSize(baseStyle.getFont().getSize(), 2, 6, 1, false);
 	}

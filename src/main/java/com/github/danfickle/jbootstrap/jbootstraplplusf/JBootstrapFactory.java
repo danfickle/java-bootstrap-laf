@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import com.github.danfickle.jbootstrap.jbootstraplplusf.JBootstrapTextField.JBootstrapTextFieldType;
+
 public class JBootstrapFactory
 {
 	public enum JBootstrapLabelType
@@ -130,5 +132,13 @@ public class JBootstrapFactory
 		JButton btn = new JButton(text);
 		btn.putClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS, type.cls + " " + sz.cls);
 		return btn;
+	}
+	
+	public static JBootstrapTextField createTextField(String placeholder, JBootstrapTextFieldType tp)
+	{
+		JBootstrapTextField txt = new JBootstrapTextField();
+		txt.setPlaceholder(placeholder);
+		txt.setType(tp);
+		return txt;
 	}
 }
