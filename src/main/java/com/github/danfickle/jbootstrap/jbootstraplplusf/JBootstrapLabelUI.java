@@ -8,7 +8,6 @@ import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
@@ -16,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicLabelUI;
+
 import com.github.danfickle.jbootstrap.jbootstraplplusf.StyleLabel.LabelBaseStyle;
 
 public class JBootstrapLabelUI extends BasicLabelUI implements PropertyChangeListener
@@ -31,6 +31,10 @@ public class JBootstrapLabelUI extends BasicLabelUI implements PropertyChangeLis
 	private boolean isJBootstrapLabel(JLabel b)
 	{
 		String clss = (String) b.getClientProperty(JBootstrapLF.JBOOTSTRAP_CLASS);
+
+		if (baseStyle == null && clss != null)
+			baseStyle = StyleLabel.applyStyles(clss);
+		
 		return clss != null;
 	}
 	

@@ -34,25 +34,25 @@ public class TextFieldTest
 				comp.setPreferredSize(new Dimension(500, 400));
 				comp.setBackground(Color.white);		
 
-				JBootstrapTextField txt = JBootstrapFactory.createTextField("placeholder", JBootstrapTextFieldType.DEFAULT);
-				txt.setText("This is a test");
+				JBootstrapTextField txt = JBootstrapFactory.createTextField(15, "default", JBootstrapTextFieldType.DEFAULT);
+				txt.setText("default text");
 				comp.add(txt);
 				
-				txt = JBootstrapFactory.createTextField("placeholder", JBootstrapTextFieldType.DANGER);
+				txt = JBootstrapFactory.createTextField(15, "danger", JBootstrapTextFieldType.DANGER);
 				comp.add(txt);
 
-				txt = JBootstrapFactory.createTextField("placeholder", JBootstrapTextFieldType.WARNING);
+				txt = JBootstrapFactory.createTextField(15, "warning", JBootstrapTextFieldType.WARNING);
 				comp.add(txt);
 
-				txt = JBootstrapFactory.createTextField("placeholder", JBootstrapTextFieldType.INFO);
+				txt = JBootstrapFactory.createTextField(15, "info", JBootstrapTextFieldType.INFO);
 				comp.add(txt);
 
-				txt = JBootstrapFactory.createTextField("placeholder", JBootstrapTextFieldType.SUCCESS);
+				txt = JBootstrapFactory.createTextField(15, "success search", JBootstrapTextFieldType.SUCCESS);
 				txt.setSearch(true);
 				comp.add(txt);
 
-				JTextField txt2 = new JTextField();
-				txt2.setText("test text");
+				JTextField txt2 = new JTextField(10);
+				txt2.setText("plain");
 				comp.add(txt2);
 				
 				JFrame frame = new JFrame("Test");

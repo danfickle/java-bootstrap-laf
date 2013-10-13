@@ -10,7 +10,7 @@ import com.github.danfickle.jbootstrap.jbootstraplplusf.JBootstrapTextField.JBoo
 
 public class JBootstrapFactory
 {
-	public enum JBootstrapLabelType
+	public static enum JBootstrapLabelType
 	{
 		DEFAULT("label"),
 		INFO("label label-info"),
@@ -27,7 +27,7 @@ public class JBootstrapFactory
 		}
 	}
 
-	public enum JBootstrapBadgeType
+	public static enum JBootstrapBadgeType
 	{
 		DEFAULT("badge"),
 		INFO("badge badge-info"),
@@ -44,7 +44,7 @@ public class JBootstrapFactory
 		}
 	}
 	
-	public enum JBootstrapTextType
+	public static enum JBootstrapTextType
 	{
 		DEFAULT(Color.BLACK, "black"),
 		INFO(new Color(0x3A87AD), "#3A87AD"),
@@ -62,7 +62,7 @@ public class JBootstrapFactory
 		}
 	}	
 	
-	public enum JBootstrapButtonType
+	public static enum JBootstrapButtonType
 	{
 		DEFAULT("btn"),
 		INFO("btn btn-info"),
@@ -80,7 +80,7 @@ public class JBootstrapFactory
 		}
 	}
 	
-	public enum JBootstrapButtonSize
+	public static enum JBootstrapButtonSize
 	{
 		DEFAULT("btn-default"),
 		MINI("btn-mini"),
@@ -134,11 +134,12 @@ public class JBootstrapFactory
 		return btn;
 	}
 	
-	public static JBootstrapTextField createTextField(String placeholder, JBootstrapTextFieldType tp)
+	public static JBootstrapTextField createTextField(int cols, String placeholder, JBootstrapTextFieldType tp)
 	{
 		JBootstrapTextField txt = new JBootstrapTextField();
 		txt.setPlaceholder(placeholder);
 		txt.setType(tp);
+		txt.setColumns(cols);
 		return txt;
 	}
 }

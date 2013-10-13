@@ -3,7 +3,7 @@ package com.github.danfickle.jbootstrap.jbootstraplplusf;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
@@ -12,7 +12,9 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.AbstractBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTextFieldUI;
@@ -60,7 +62,6 @@ public class JBootstrapTextFieldUI extends BasicTextFieldUI implements FocusList
 		super.uninstallListeners();
 	}
 	
-	
 	private void installMyDefaults()
 	{
 		txt.setBorder(new MyBorder());
@@ -79,7 +80,7 @@ public class JBootstrapTextFieldUI extends BasicTextFieldUI implements FocusList
 		@Override
         public Insets getBorderInsets(Component c) 
 		{
-			return new Insets(8, 8, 8, 8);
+			return new Insets(8, 12, 8, 12);
 		}
 		
 		@Override
@@ -127,26 +128,23 @@ public class JBootstrapTextFieldUI extends BasicTextFieldUI implements FocusList
 			g2.drawRoundRect(x + 1, y + 1, w - 2, h - 2, arc, arc);
 		}
 	}
-	
-	@Override
-	public Dimension getPreferredSize(JComponent c) 
-	{
-		if (!(txt instanceof JBootstrapTextField))
-			return super.getPreferredSize(c);
-		
-		Dimension superPref = super.getPreferredSize(txt);
-		if (superPref == null)
-			return null;
 
-		int width = Math.max(getMinTextFieldWidth(txt.getFont().getSize()), superPref.width);
-		int height = superPref.height;
-		
-		return new Dimension(width, height);
-	}
-	
-	private static int getMinTextFieldWidth(int fontSize)
+	@Override
+	protected void paintBackground(Graphics g) 
 	{
-		return 12 * fontSize + 12;
+		super.paintBackground(g);
+		
+		Insets s = txt.getInsets();
+
+		if (txt instanceof JBootstrapTextField && txt.getText().isEmpty() && !txt.hasFocus())
+		{
+			JLabel lbl = new JLabel(" " + ((JBootstrapTextField) txt).getPlaceholder());
+			lbl.setFont(new Font(txt.getFont().getFontName(), Font.ITALIC, txt.getFont().getSize() - 1));
+			lbl.setForeground(Color.gray);
+			lbl.setBackground(txt.getBackground());
+			
+			SwingUtilities.paintComponent(g, lbl, txt, s.left, s.top, txt.getWidth() - s.left - s.right, txt.getHeight() - s.top - s.bottom);
+		}
 	}
 	
 	private float getCornerRadius() 

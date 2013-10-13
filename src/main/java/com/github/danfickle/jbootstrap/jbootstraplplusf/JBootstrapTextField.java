@@ -9,10 +9,10 @@ public class JBootstrapTextField extends JTextField
 	private static final long serialVersionUID = 1L;
 
 	private JBootstrapTextFieldType tp = JBootstrapTextFieldType.DEFAULT;
-	private String ph, pp, ap;
+	private String ph;
 	private boolean search;
 	
-	public enum JBootstrapTextFieldType
+	public static enum JBootstrapTextFieldType
 	{
 		DEFAULT(new Color(0xCCCCCC), new Color(82, 168, 236, 200)),
 		WARNING(new Color(0xC09853), new Color(0xC0, 0x98, 0x53, 200)),
@@ -64,27 +64,5 @@ public class JBootstrapTextField extends JTextField
 	public boolean isSearch()
 	{
 		return search;
-	}
-
-	public void setPrepend(String prepend)
-	{
-		pp = prepend;
-		repaint();
-	}
-
-	public String getPrepend()
-	{
-		return pp;
-	}
-
-	public void setAppend(String append)
-	{
-		ap = append;
-		repaint();
-	}
-
-	public String getAppend()
-	{
-		return ap;
 	}
 }
