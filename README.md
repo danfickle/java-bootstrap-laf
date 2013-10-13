@@ -6,9 +6,11 @@
 
 Implemented
 -----------
-+ Badges
-+ Labels
-+ Buttons
++ Text fields (JTextField)
++ Styled text (JLabel)
++ Badges (JLabel)
++ Labels (JLabel)
++ Buttons (JButton)
 
 Contributing
 ------------
@@ -17,4 +19,5 @@ Pull requests and issues are very welcome.
 Acknowledgements
 ----------------
 [Insubstantial Project](https://github.com/Insubstantial/insubstantial)
+[MetroLAF](https://github.com/cdavoren/MetroLAF)
 
