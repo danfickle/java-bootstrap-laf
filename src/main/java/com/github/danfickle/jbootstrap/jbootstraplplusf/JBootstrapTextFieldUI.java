@@ -8,8 +8,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -18,6 +21,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.AbstractBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTextFieldUI;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
+import javax.swing.text.Highlighter.Highlight;
+import javax.swing.text.JTextComponent;
+import javax.swing.text.Highlighter.HighlightPainter;
 
 public class JBootstrapTextFieldUI extends BasicTextFieldUI implements FocusListener
 {
@@ -65,6 +74,119 @@ public class JBootstrapTextFieldUI extends BasicTextFieldUI implements FocusList
 	private void installMyDefaults()
 	{
 		txt.setBorder(new MyBorder());
+		txt.setHighlighter(new MyHl());
+	}
+	
+	private static class HL implements Highlight
+	{
+		int end;
+		int start;
+		HighlightPainter p;
+
+		HL(int s, int e, HighlightPainter pp)
+		{
+			start = s;
+			end = e;
+			p = pp;
+		}
+		
+		@Override
+		public int getEndOffset() 
+		{
+			return end;
+		}
+
+		@Override
+		public HighlightPainter getPainter() 
+		{
+			return p;
+		}
+
+		@Override
+		public int getStartOffset() 
+		{
+			return start;
+		}
+		
+		@Override
+		public boolean equals(Object obj) 
+		{
+			if (!(obj instanceof HL))
+				return false;
+			
+			HL b = (HL) obj;
+			
+			return start == b.start && end == b.end && p.equals(b.p);
+		}
+	}
+	
+	static class MyHl implements Highlighter
+	{
+		private JTextComponent t;
+		private final List<Highlight> hls = new ArrayList<Highlight>(1);
+		private static final HighlightPainter hlp = new DefaultHighlighter.DefaultHighlightPainter(new Color(0xFF9238));
+		
+		@Override
+		public void install(JTextComponent c) 
+		{
+			t = c;
+		}
+
+		@Override
+		public Object addHighlight(final int p0, final int p1, final HighlightPainter p)
+				throws BadLocationException
+		{
+			HL h = new HL(p0, p1, p);
+			hls.add(h);
+			t.repaint();
+			return h;
+		}
+		
+		@Override
+		public void paint(Graphics g)
+		{
+			if (hls.isEmpty())
+				return;
+		    
+		    Shape bounds = t.getBounds();
+
+		    for (Highlight hl : hls)
+		    {
+		    	hlp.paint(g, hl.getStartOffset(), hl.getEndOffset(), bounds, t);
+		    }
+		}
+		
+		@Override
+		public void changeHighlight(Object tag, int p0, int p1)
+				throws BadLocationException
+		{
+			((HL) tag).end = p1;
+			((HL) tag).start = p0;
+			t.repaint();
+		}
+		
+		@Override
+		public Highlight[] getHighlights()
+		{
+			return hls.toArray(new Highlight[hls.size()]);
+		}
+
+		@Override
+		public void deinstall(JTextComponent c) { }
+
+		@Override
+		public void removeAllHighlights() 
+		{
+			hls.clear();
+			t.repaint();
+		}
+
+		@Override
+		public void removeHighlight(Object tag) 
+		{
+			hls.remove(tag);
+			t.repaint();
+		}
 	}
 	
 	private class MyBorder extends AbstractBorder

@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -54,6 +55,9 @@ public class TextFieldTest
 				JTextField txt2 = new JTextField(10);
 				txt2.setText("plain");
 				comp.add(txt2);
+				
+				JPasswordField psw = new JPasswordField(10);
+				comp.add(psw);
 				
 				JFrame frame = new JFrame("Test");
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
